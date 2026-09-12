@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nepal | Natural Beauty</title>
+    <meta
+      name="description"
+      content="Explore the beauty of Nepal through mountains, culture, and unforgettable journeys."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page-loader" aria-live="polite" aria-label="Loading Nepal experience">
+      <div class="loader-mark">N</div>
+      <div class="loader-text">
+        <span>Welcome to</span>
+        <strong>Nepal</strong>
+      </div>
+      <div class="loader-bar"><span></span></div>
+    </div>
+
+    <div class="auth-modal" id="tripModal" aria-hidden="true">
+      <div class="auth-modal-backdrop" data-close-auth></div>
+      <div class="auth-card" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+        <button class="auth-close" type="button" aria-label="Close login form" data-close-auth>
+          ×
+        </button>
+
+        <div class="auth-header">
+          <p class="eyebrow alt">Trip access</p>
+          <h2 id="authTitle">Log in to plan your Nepal journey</h2>
+        </div>
+
+        <div class="auth-tabs" aria-label="Authentication mode">
+          <button class="auth-tab is-active" type="button" data-auth-mode="login">Login</button>
+          <button class="auth-tab" type="button" data-auth-mode="signup">Sign up</button>
+        </div>
+
+        <form class="auth-form is-visible" id="loginForm">
+          <label class="field">
+            <span>Gmail</span>
+            <input type="email" name="gmail" placeholder="yourname@gmail.com" required />
+          </label>
+
+          <label class="field">
+            <span>Password</span>
+            <input type="password" name="password" placeholder="Enter your password" required />
+          </label>
+
+          <div class="auth-options">
+            <label class="checkbox-row">
+              <input type="checkbox" name="remember" />
+              <span>Remember me</span>
+            </label>
+            <a href="#">Forgot password?</a>
+          </div>
+
+          <button class="btn btn-primary auth-submit" type="submit">Login</button>
+          <p class="auth-status" aria-live="polite"></p>
+        </form>
+
+        <form class="auth-form" id="signupForm">
+          <label class="field">
+            <span>Full name</span>
+            <input type="text" name="fullName" placeholder="Your full name" required />
+          </label>
+
+          <label class="field">
+            <span>Gmail</span>
+            <input type="email" name="gmail" placeholder="yourname@gmail.com" required />
+          </label>
+
+          <label class="field">
+            <span>Password</span>
+            <input type="password" name="password" placeholder="Create a password" required />
+          </label>
+
+          <button class="btn btn-primary auth-submit" type="submit">Create account</button>
+          <p class="auth-status" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+
+    <aside class="dashboard-panel" id="adminDashboard" aria-live="polite">
+      <div class="dashboard-header">
+        <div>
+          <p class="eyebrow alt">Admin dashboard</p>
+          <h3>Registered users</h3>
+        </div>
+        <button class="dashboard-close" type="button" id="closeDashboard">×</button>
+      </div>
+      <div class="dashboard-summary">
+        <div>
+          <span>Total accounts</span>
+          <strong id="totalUsers">0</strong>
+        </div>
+        <div>
+          <span>Admins</span>
+          <strong id="adminCount">0</strong>
+        </div>
+        <div>
+          <span>Viewers</span>
+          <strong id="viewerCount">0</strong>
+        </div>
+      </div>
+      <div class="dashboard-sections">
+        <div>
+          <h4>Credential log</h4>
+          <ul id="credentialList" class="record-list"></ul>
+        </div>
+        <div>
+          <h4>Profiles</h4>
+          <ul id="profileList" class="record-list"></ul>
+        </div>
+        <div>
+          <h4>Viewer live GPS</h4>
+          <ul id="viewerLocationList" class="record-list"></ul>
+        </div>
+      </div>
+    </aside>
+
+    <div class="profile-widget" id="profileWidget">
+      <button class="profile-toggle" id="profileToggle" type="button" aria-label="Open profile details">
+        <span class="profile-avatar" id="profileAvatar">N</span>
+      </button>
+
+      <aside class="profile-panel" id="profilePanel" aria-live="polite">
+        <div class="profile-card">
+          <div class="profile-avatar large" id="profileAvatarLarge">N</div>
+          <div class="profile-info">
+            <p class="eyebrow alt">Traveler profile</p>
+            <h3 id="profileName">Nepal Explorer</h3>
+            <p id="profileEmail">hello@example.com</p>
+            <span class="profile-role" id="profileRole">Viewer</span>
+          </div>
+        </div>
+
+        <div class="profile-menu">
+          <button type="button" class="menu-item admin-only" id="openDashboardButton">
+            <span class="menu-icon">▣</span>
+            Dashboard
+          </button>
+          <button type="button" class="menu-item">
+            <span class="menu-icon">⚙</span>
+            Settings
+          </button>
+          <button type="button" class="menu-item menu-item-danger" data-action="logout">
+            <span class="menu-icon">⏻</span>
+            Logout
+          </button>
+        </div>
+      </aside>
+    </div>
+
+    <header class="header">
+      <nav class="nav container">
+        <div class="logo">
+          <span class="logo-mark">N</span>
+          <span>Nepal</span>
+        </div>
+
+        <div class="nav-links">
+          <a href="#home">Home</a>
+          <a href="#places">Places</a>
+          <a href="#gallery">Gallery</a>
+          <a href="#culture">Culture</a>
+          <a href="#journey">Journey</a>
+          <a href="#contact">Contact</a>
+        </div>
+
+        <button class="btn btn-primary js-open-auth" type="button" data-auth-mode="signup">Sign up</button>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" id="home">
+        <div class="overlay"></div>
+        <div class="container hero-content">
+          <p class="eyebrow" data-reveal>Discover the Himalayan Kingdom</p>
+          <h1 data-reveal>Nature, Culture, and Adventure in Nepal</h1>
+          <p class="lead" data-reveal>
+            From snow-capped peaks to peaceful valleys, Nepal offers a journey of
+            awe, serenity, and unforgettable memories.
+          </p>
+          <div class="hero-actions" data-reveal>
+            <a class="btn btn-primary" href="#tripPlanner">Explore now</a>
+            <a class="btn btn-secondary" href="#culture">Learn more</a>
+          </div>
+
+          <div class="stats">
+            <div data-reveal>
+              <strong>8</strong>
+              <span>World Heritage Sites</span>
+            </div>
+            <div data-reveal>
+              <strong>1,000+</strong>
+              <span>Hiking Trails</span>
+            </div>
+            <div data-reveal>
+              <strong>10</strong>
+              <span>National Parks</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="highlights container" id="places">
+        <div class="section-head">
+          <p class="eyebrow alt">Top destinations</p>
+          <h2>Places that take your breath away</h2>
+        </div>
+
+        <div class="card-grid">
+          <article class="destination-card" data-reveal>
+            <img
+              src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=900&q=80"
+              alt="Everest region"
+            />
+            <div class="card-body">
+              <h3>Everest Region</h3>
+              <p>
+                Majestic snow peaks, high-altitude trekking, and unforgettable sunrise views.
+              </p>
+            </div>
+          </article>
+
+          <article class="destination-card" data-reveal>
+            <img
+              src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=900&q=80"
+              alt="Pokhara lake"
+            />
+            <div class="card-body">
+              <h3>Pokhara</h3>
+              <p>
+                Calm lakes, lush hills, and a scenic gateway to the Annapurna range.
+              </p>
+            </div>
+          </article>
+
+          <article class="destination-card" data-reveal>
+            <img
+              src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=900&q=80"
+              alt="Bhaktapur"
+            />
+            <div class="card-body">
+              <h3>Bhaktapur</h3>
+              <p>
+                Ancient squares, handcrafted art, and vibrant heritage preserved through time.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="gallery container" id="gallery">
+        <div class="section-head">
+          <p class="eyebrow alt">Photo journey</p>
+          <h2>Moments from the Himalayan landscape</h2>
+        </div>
+
+        <div class="gallery-grid">
+          <figure class="gallery-item tall">
+            <img
+              src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=900&q=80"
+              alt="Mountain valley in Nepal"
+            />
+          </figure>
+          <figure class="gallery-item">
+            <img
+              src="https://images.unsplash.com/photo-1521295121783-8a321d551ad2?auto=format&fit=crop&w=900&q=80"
+              alt="Temple in Nepal"
+            />
+          </figure>
+          <figure class="gallery-item">
+            <img
+              src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80"
+              alt="Lake and mountains"
+            />
+          </figure>
+          <figure class="gallery-item wide">
+            <img
+              src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80"
+              alt="Scenic lake and hills in Pokhara"
+            />
+          </figure>
+        </div>
+      </section>
+
+      <section class="culture" id="culture">
+        <div class="container culture-grid">
+          <div class="culture-text">
+            <p class="eyebrow alt">Nepalese spirit</p>
+            <h2>Where tradition meets the mountains</h2>
+            <p>
+              Nepal is a land of warm hospitality, colorful festivals, ancient temples,
+              and spiritual peace. Every valley tells a story of heritage and harmony.
+            </p>
+            <ul>
+              <li>Festivals such as Dashain and Tihar bring communities together.</li>
+              <li>Mountain communities preserve time-honored customs and lifestyles.</li>
+              <li>Ancient temples and monasteries add depth to every journey.</li>
+            </ul>
+          </div>
+
+          <div class="culture-image">
+            <img
+              src="https://images.unsplash.com/photo-1527631746610-bca00a040d60?auto=format&fit=crop&w=1200&q=80"
+              alt="Nepalese temple and mountains"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section class="province-section">
+        <div class="container">
+          <div class="section-head">
+            <p class="eyebrow alt">Seven provinces</p>
+            <h2>Explore Nepal's diverse regions</h2>
+          </div>
+
+          <div class="province-grid">
+            <article class="province-card">
+              <h3>1. Koshi Province</h3>
+              <ul>
+                <li><strong>Famous places:</strong> Mount Everest, Sagarmatha National Park, Koshi Tappu Wildlife Reserve</li>
+                <li><strong>Resources:</strong> Hydropower, agriculture, forests, medicinal herbs</li>
+                <li><strong>Animals:</strong> Red panda, Himalayan tahr, wild boar, migratory birds</li>
+                <li><strong>Culture:</strong> Rai, Limbu, Sherpa, and Tamang traditions, vibrant festivals and mountain heritage</li>
+              </ul>
+            </article>
+
+            <article class="province-card">
+              <h3>2. Madhesh Province</h3>
+              <ul>
+                <li><strong>Famous places:</strong> Janakpur, Ram Janaki Temple, Chhath Ghat, Kushinagar connection</li>
+                <li><strong>Resources:</strong> Fertile plains, rice, wheat, livestock, and trade routes</li>
+                <li><strong>Animals:</strong> Gharial, crocodiles, buffalo, deer, and birds of the Terai</li>
+                <li><strong>Culture:</strong> Mithila art, Maithili language, folk songs, and deep Hindu traditions</li>
+              </ul>
+            </article>
+
+            <article class="province-card">
+              <h3>3. Bagmati Province</h3>
+              <ul>
+                <li><strong>Famous places:</strong> Kathmandu Valley, Pashupatinath, Bouddhanath, Bhaktapur Durbar Square</li>
+                <li><strong>Resources:</strong> Tourism, heritage industries, hydropower, services, and handicrafts</li>
+                <li><strong>Animals:</strong> Langur monkeys, Himalayan birds, leopards in nearby hills</li>
+                <li><strong>Culture:</strong> Newari civilization, temple architecture, festivals like Indra Jatra and Dashain</li>
+              </ul>
+            </article>
+
+            <article class="province-card">
+              <h3>4. Gandaki Province</h3>
+              <ul>
+                <li><strong>Famous places:</strong> Pokhara, Annapurna Circuit, Manang, Muktinath</li>
+                <li><strong>Resources:</strong> Tourism, hydropower, mountain agriculture, medicinal plants</li>
+                <li><strong>Animals:</strong> Snow leopard, musk deer, Himalayan monal, red panda</li>
+                <li><strong>Culture:</strong> Gurung, Magar, and Tibetan-influenced traditions, prayer flags, and mountain festivals</li>
+              </ul>
+            </article>
+
+            <article class="province-card">
+              <h3>5. Lumbini Province</h3>
+              <ul>
+                <li><strong>Famous places:</strong> Lumbini, Devdaha, Tilaurakot, Buddhist pilgrimage sites</li>
+                <li><strong>Resources:</strong> Agriculture, timber, rice and wheat production, natural forests</li>
+                <li><strong>Animals:</strong> One-horned rhinoceros, Bengal tiger, deer, crocodiles, and birds</li>
+                <li><strong>Culture:</strong> Buddhist heritage, diverse ethnic communities, and spiritual peace</li>
+              </ul>
+            </article>
+
+            <article class="province-card">
+              <h3>6. Karnali Province</h3>
+              <ul>
+                <li><strong>Famous places:</strong> Rara Lake, Shey Phoksundo National Park, Jumla, Dolpa</li>
+                <li><strong>Resources:</strong> Minerals, medicinal plants, forests, alpine pasture, hydropower potential</li>
+                <li><strong>Animals:</strong> Blue sheep, snow leopard, Himalayan musk deer, wild yak</li>
+                <li><strong>Culture:</strong> Indigenous traditions of Karnali people, folk dances, and remote mountain lifestyles</li>
+              </ul>
+            </article>
+
+            <article class="province-card">
+              <h3>7. Sudurpashchim Province</h3>
+              <ul>
+                <li><strong>Famous places:</strong> Api Himal, Khaptad National Park, Dipayal, Shuklaphanta National Park</li>
+                <li><strong>Resources:</strong> Medicinal herbs, forests, livestock, minerals, and mountain agriculture</li>
+                <li><strong>Animals:</strong> Bengal tiger, swamp deer, peacocks, and Himalayan wildlife</li>
+                <li><strong>Culture:</strong> Tharu, Magar, and hill communities; local fairs, dances, and oral traditions</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="journey container" id="journey">
+        <div class="section-head">
+          <p class="eyebrow alt">Make memories</p>
+          <h2>Experience Nepal in every season</h2>
+        </div>
+
+        <div class="journey-grid">
+          <div class="journey-card" data-reveal>
+            <span>01</span>
+            <h3>Hiking</h3>
+            <p>Discover ridge trails, scenic valleys, and Himalayan grandeur.</p>
+          </div>
+          <div class="journey-card" data-reveal>
+            <span>02</span>
+            <h3>Wildlife</h3>
+            <p>Explore national parks and rich biodiversity across its forests.</p>
+          </div>
+          <div class="journey-card" data-reveal>
+            <span>03</span>
+            <h3>Culture</h3>
+            <p>Visit sacred monasteries, heritage sites, and vibrant local markets.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="trip-planner" id="tripPlanner" aria-live="polite">
+        <div class="container trip-planner-inner">
+          <div class="trip-planner-header">
+            <div>
+              <p class="eyebrow alt">Plan your visit</p>
+              <h2>Choose your favorite place in Nepal</h2>
+            </div>
+            <span id="tripStatus" class="trip-status">No trip saved yet</span>
+          </div>
+
+          <div class="trip-layout">
+            <div class="map-panel">
+              <div class="map-heading">
+                <div>
+                  <span class="map-kicker">Live map</span>
+                  <h3>Explore the destination</h3>
+                </div>
+                <a class="map-open-link" id="openGoogleMap" href="https://www.google.com/maps/search/?api=1&amp;query=Kathmandu%2C+Nepal" target="_blank" rel="noopener">Open in Google Maps ↗</a>
+              </div>
+              <div class="nepal-map" id="nepalMap" aria-label="Live Google Map of the selected Nepal destination">
+                <iframe
+                  id="googleMapFrame"
+                  title="Live Google Map"
+                  src="https://www.google.com/maps?q=Kathmandu%2C+Nepal&amp;output=embed"
+                  loading="lazy"
+                  allowfullscreen
+                  referrerpolicy="no-referrer-when-downgrade"
+                ></iframe>
+              </div>
+              <div class="map-legend">
+                <span>Live Google Maps view</span>
+                <span>Use the link above for directions, layers, and street view</span>
+              </div>
+            </div>
+
+            <div class="trip-controls">
+              <div class="field place-select">
+                <span>Select district</span>
+                <div class="place-grid compact" id="placeGrid"></div>
+              </div>
+
+              <article class="destination-detail" id="destinationDetail" aria-live="polite">
+                <div class="detail-heading">
+                  <div>
+                    <span class="detail-kicker">Selected destination</span>
+                    <h3 id="detailName">Kathmandu</h3>
+                  </div>
+                  <span class="detail-coordinate" id="detailCoordinates">27.7172° N, 85.3240° E</span>
+                </div>
+                <p id="detailSummary"></p>
+                <div class="detail-facts">
+                  <div><span>Province</span><strong id="detailProvince"></strong></div>
+                  <div><span>Elevation</span><strong id="detailElevation"></strong></div>
+                  <div><span>Best season</span><strong id="detailBestTime"></strong></div>
+                </div>
+                <div class="detail-highlights">
+                  <span>What to see</span>
+                  <p id="detailHighlights"></p>
+                </div>
+              </article>
+
+              <div class="location-box">
+                <span>Current GPS</span>
+                <strong id="gpsValue">GPS not shared yet</strong>
+                <button class="btn btn-primary" id="useCurrentLocation" type="button">Use my current location</button>
+              </div>
+
+              <button class="btn btn-primary full-width" id="saveTripChoice" type="button">Save district</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta-section" id="contact">
+        <div class="container cta-panel" data-reveal>
+          <div class="cta-copy">
+            <p class="eyebrow alt">Plan your escape</p>
+            <h2>Let Nepal turn your next trip into a story worth telling.</h2>
+          </div>
+          <div class="cta-actions">
+            <button class="btn btn-primary js-open-auth" type="button" data-auth-mode="signup">Sign up</button>
+            <a class="btn btn-secondary-light" href="mailto:hello@nepaljourney.com">Contact us</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <div>
+          <div class="logo">
+            <span class="logo-mark">N</span>
+            <span>Nepal</span>
+          </div>
+          <p>Celebrate the beauty of the Himalayas and the soul of Nepal.</p>
+        </div>
+        <div class="footer-links">
+          <a href="#home">Home</a>
+          <a href="#places">Places</a>
+          <a href="#gallery">Gallery</a>
+          <a href="#culture">Culture</a>
+          <a href="#journey">Journey</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
